@@ -25,3 +25,6 @@ function maths(opt,no1,no2){
 
 maths("add", 2,3);
 maths("sub", 20,3);
+
+// named parameter passing is when you want to adjust the order of where the parameters are stored
+maths("add", no2=5, no1=100);
