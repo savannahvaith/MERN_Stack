@@ -7,6 +7,7 @@ function maxthree() {
     let i = 0;
     while (i < arguments.length) {
         if (arguments[i] > first) {
+            third = second;
             second = first;
             first = arguments[i];
         } else if (arguments[i] > second && arguments[i] < first) {
@@ -17,9 +18,9 @@ function maxthree() {
         }
         i++
     }
-    console.log(" highest:", first);
-    console.log(" second:", second);
-    console.log(" second:", third);
+    console.log(" Highest:", first);
+    console.log(" Second:", second);
+    console.log(" Third:", third);
 
 
 
