@@ -9,10 +9,10 @@ function maxthree() {
         if (arguments[i] > first) {
             second = first;
             first = arguments[i];
-        } else if (arguments[i] > second & arguments[i] < first) {
+        } else if (arguments[i] > second && arguments[i] < first) {
             third = second;
             second = arguments[i];
-        } else if (arguments[i] > third & arguments[i] < second) {
+        } else if (arguments[i] > third && arguments[i] < second) {
             third = arguments[i];
         }
         i++
