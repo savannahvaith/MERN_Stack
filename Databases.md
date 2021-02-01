@@ -27,4 +27,4 @@ old_db.dropDatabase();
 
 ## Deleting a database
 
-To delete a database, use the method `dropDatabase()`
+To delete a database, use the method `db.dropDatabase()` - this will drop the current database that is selected.
