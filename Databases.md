@@ -1,4 +1,4 @@
-# Databases 
+# Databases
 
 Databases are a store of collections.
 
