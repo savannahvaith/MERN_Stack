@@ -18,3 +18,4 @@ We will be creating a exercise-tracker project using the MERN stack.
    3. mongoose -> Makes interacting with mongodb simplier
    4. dotenv -> Loads environment variables easier.
 4. Install `nodemon` globally - auto restart when file changes are detected.
+5. Create `server.js`
