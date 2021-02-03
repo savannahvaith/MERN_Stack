@@ -34,3 +34,11 @@ Finally, to communicate with the application, we need to get the application to 
 `app.listen(5019);`
 
 If you don't specify a port then it will automatically assign a open port to the application - which might be useful for testing or automation.
+
+After you have specified the port, you can pass a callback as the second parameter which we can then log to the user what port the application is running on...
+
+```js
+app.listen(5019, () => {
+    console.log(`Server successfully started on port: ${port}`);
+});
+```
