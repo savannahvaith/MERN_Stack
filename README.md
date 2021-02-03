@@ -38,7 +38,7 @@ If you don't specify a port then it will automatically assign a open port to the
 After you have specified the port, you can pass a callback as the second parameter which we can then log to the user what port the application is running on...
 
 ```js
-app.listen(5019, () => {
-    console.log(`Server successfully started on port: ${port}`);
+const server = app.listen(5019, () => {
+    console.log(`Server successfully started on port: ${server.address().port}`);
 });
 ```
