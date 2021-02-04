@@ -244,3 +244,58 @@ const bodyParser = require('body-parser');
 app.user(bodyParser);
 ```
 
+## Error handling
+
+From time to time, we are going to face issues with out requests. When things go wrong it is important to know where we went wrong.
+
+Before we can handle an error we need to create it.
+Errors can be created like this:
+
+```js
+const err = new Error("a message here"); 
+```
+
+`Error` is a built in object. The constructor takes in a message.
+
+Once we have an error, we have to handle it
+In order to handle it, we will first need to pass the error to the error handling middleware.
+
+```js
+app.get('/error', (req,res,next) => {
+    const err = new Error("a message here");
+    next(err);
+});
+```
+
+The second is to simply throw an error - behind the scenes Express will pass the error on to the error handler for you.
+
+```js
+app.get("/error",(req,res,next) => {
+    throw new Error("useful message");
+})
+```
+
+### Error handling middleware
+
+Normally Express middleware has three parameters (req, res and next), error handling middleware differs by having four parameters - err, req, res and next.
+
+When an error is thrown, using either method, the next piece of middleware with an err parameter is called.
+
+```js
+app.get('/error', (req, res, next) => {
+    const err = new Error('Useful error message');
+    next(err);
+});
+
+const errorLogger = (err, req, res, next) => {
+    console.log(err.stack);
+    next(err);
+}
+app.use(errorLogger);
+
+const sendError = (err, req, res) => {
+    res.status(500).send(err.message);
+}
+app.use(sendError);
+
+```
