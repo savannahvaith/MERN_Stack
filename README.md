@@ -299,3 +299,72 @@ const sendError = (err, req, res) => {
 app.use(sendError);
 
 ```
+
+## Router
+
+So far, we have added routes directly to our app variable.
+
+Although okay, we should utilise the methods that are available to us.
+
+Router is provided with the Express package, and can be imported into a module using `require()`
+
+`const router = require('express').Router();`
+
+This will create a router object form the express object.
+
+Express Router uses **exactly** the same function that we saw earlier.
+
+```js
+router.get(path, callback);
+router.put(path, callback);
+router.post(path, callback);
+router.patch(path, callback);
+router.delete(path, callback);
+```
+
+Routes should live in their own folder - we need to seperate logic for different entities.
+
+For instance, if we had a products example:
+
+```js
+const router = require('express').Router(); 
+router.get('/get',(req,res) => { 
+    // .. 
+}); 
+
+// post
+// put
+// patch
+// delete
+```
+
+we need to export all of these functions to our `server.js`, to do so, we will export the routes and import into `server.js`
+
+at the end of the file in the above code, we will add:
+
+```js
+module.exports = router; 
+```
+
+In our `server.js`:
+
+```js
+const productRoutes = require("./routes/products.js");
+
+app.use(productRoutes);
+```
+
+### Base Paths
+
+When adding routes to our `app` we can specify the base path, this path will be prepended to the paths specified in the router.
+
+If we added "products" as the base routes to the above code, the output would be the following:
+
+```js
+app.use("products", productRoutes);
+
+// products/get
+// products/create
+// products/update
+// products/delete
+```
