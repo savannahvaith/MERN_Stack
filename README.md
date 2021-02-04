@@ -180,3 +180,67 @@ app.get('/error',(req,res) => {
     res.status(500).send('Mistakes are made');
 });
 ```
+
+## Middleware
+
+Middleware is software that facilitates communication between two different techs (i.e. db and an app).
+Often provides extra functionality to the software it is placed between.
+
+Middleware in express is just a function - it should have a familiar structure `req,res,next`
+
+```js
+app.use((req,res,next) => {
+    // some logic
+    next();
+})
+```
+
+### Next()
+
+This is a handler function that calls the next piece of middleware in the chain.
+
+Every middleware function should either terminate with `res.send()` or `next()` - else the request will hang.
+
+### Creating middleware
+
+Middleware is just a function, creating middleware is as simple as making a function that follows the convention then executing it.
+
+```js
+const logger = (req,res,next) => {
+    console.log(new Date());
+    next(); 
+}
+
+app.use(logger);
+```
+
+Now, whenever a route further down is hit this function will be called first, log the date then hand over to the next function in the chain.
+
+### Nesting middleware
+
+To apply middleware to some routes - we can do this by nesting the middleware
+
+```js
+app.get("/",logger,(req,res) => {
+    res.send("Hello World");
+});
+```
+
+### Common middleware
+
+`cors` - used to disable restrictions on *Cross origin resource sharing*
+
+```js
+const cors = require("cors"); 
+app.use(cors);
+```
+
+`body-parser` - allows for the parsing of request bodies into JS objects.
+Comes with several body parsers but json is probably the most powerful.
+
+```js
+const bodyParser = require('body-parser');
+
+app.user(bodyParser);
+```
+
