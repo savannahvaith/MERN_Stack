@@ -361,7 +361,7 @@ When adding routes to our `app` we can specify the base path, this path will be 
 If we added "products" as the base routes to the above code, the output would be the following:
 
 ```js
-app.use("products", productRoutes);
+app.use("/products", productRoutes);
 
 // products/get
 // products/create
