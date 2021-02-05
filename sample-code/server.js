@@ -13,7 +13,7 @@ app.use(logger);
 
 app.use("/prod",productRouter);
 
-// // Route example:
+// ! Route example - Moved to products.js:
 // app.get("/hello", (req,res) => {
 // 	res.send("Who dat");
 // });
