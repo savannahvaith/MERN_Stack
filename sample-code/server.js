@@ -3,13 +3,14 @@ const app = express();
 
 const productRouter = require("./routes/products");
 
-// // Middleware
-// const logger = (req, res, next) => {
-// 	console.log(new Date());
-// 	next();
-// }
+// Middleware
+const logger = (req, res, next) => {
+	console.log(new Date());
+	next();
+}
 
-// app.use(logger);
+app.use(logger);
+
 app.use("/prod",productRouter);
 
 // // Route example:
