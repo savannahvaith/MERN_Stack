@@ -1,23 +1,25 @@
 const express = require('express');
-
 const app = express(); 
 
-// Middleware
-const logger = (req, res, next) => {
-	console.log(new Date());
-	next();
-}
+const productRouter = require("./routes/products");
 
-app.use(logger);
+// // Middleware
+// const logger = (req, res, next) => {
+// 	console.log(new Date());
+// 	next();
+// }
 
-// Route example:
-app.get("/hello", (req,res) => {
-	res.send("Who dat");
-});
+// app.use(logger);
+app.use("/prod",productRouter);
 
-app.get("/",logger,(req,res) => {
-	res.send("Hello,world");
-});
+// // Route example:
+// app.get("/hello", (req,res) => {
+// 	res.send("Who dat");
+// });
+
+// app.get("/",logger,(req,res) => {
+// 	res.send("Hello,world");
+// });
 
 const server = app.listen(5019, () => {
 	console.log(`Server listening on port ${server.address().port}`);
