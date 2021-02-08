@@ -373,7 +373,7 @@ app.use("/products", productRoutes);
 
 Mongoose is a MongoDB object modelling library, written in JS.
 IT provides a simple API to work with MongoDB Database.
-It allows for interaction with the DB Directly without having to use SQL, or a query language. 
+It allows for interaction with the DB Directly without having to use SQL, or a query language.
 
 ### Mongoose Installation
 
@@ -410,4 +410,64 @@ mongoose.connect(uri,options){
     }
 }
 ```
+### Schemas
 
+Schemas define the structure of your collections, and the shape of the documents within.
+
+A schema is a configuration object for a model.
+
+A `SchemaType` is a configuration object for an individual property.
+It says what type a given path should have and what is valid for that path.
+Standard types include:
+
+* String
+* Boolean
+* Date
+* etc
+
+[Documentation](https://mongoosejs.com/docs/schematypes.html)
+
+```js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+    name: String, 
+    price: String, 
+    location: [{
+        aisle: Number,
+        shelf: Number
+    }],
+    dateAdded:{
+        type: Date,
+        default: Date.now
+    }, 
+    onSale: Boolean
+});
+```
+
+### Validation
+
+Validation can be used to control what data is allowed in the schema.
+
+Validation is declared when defining a schema:
+
+```js
+const productSchema = new Schema({ 
+    name: {
+        type:String,
+        required: true,
+        minLength:2
+    },
+    price: String, 
+    location: [{
+        aisle: {
+            type: Number,
+            min: [1, 'Minimum is 1'],
+            max: 20
+        },
+        shelf: Number
+    }],
+    // ...
+});
+```
