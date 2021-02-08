@@ -368,3 +368,46 @@ app.use("/products", productRoutes);
 // products/update
 // products/delete
 ```
+
+## Mongoose
+
+Mongoose is a MongoDB object modelling library, written in JS.
+IT provides a simple API to work with MongoDB Database.
+It allows for interaction with the DB Directly without having to use SQL, or a query language. 
+
+### Mongoose Installation
+
+`npm install mongoose --save`
+
+Import using require
+
+`const mongoose = require('mongoose');`
+
+### Connecting to MongoDB
+
+Connect using `mongoose.connect(uri,options`);
+
+This connects using mongoose default connection:
+
+`mongoose.connect('mongodb://localhost:2017/example', {useNewUrlParser:true});`
+
+We can connect to multiple databases by creating a new connection using the same format.
+
+Different connections can use different settings and can be connected to different databases:
+
+`const conn2 = mongoose.createConnection('mongodb://localhost:27017/example2',{urlNewUrlParser:true});`
+
+To check whether the connection was successful - use a callback or a promise:
+
+```js
+mongoose.connect(uri,options){
+    function(err){
+        if(err){
+            // handle error
+        }else{
+            // connection ready
+        }
+    }
+}
+```
+
