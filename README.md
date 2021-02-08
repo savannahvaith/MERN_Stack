@@ -410,6 +410,7 @@ mongoose.connect(uri,options){
     }
 }
 ```
+
 ### Schemas
 
 Schemas define the structure of your collections, and the shape of the documents within.
@@ -471,3 +472,93 @@ const productSchema = new Schema({
     // ...
 });
 ```
+
+### Models
+
+Models are constructors compiled from schema definitions.
+
+They are responsible for creating, and reading documents from the database.
+
+Call `mongoose.model(name,schema)` to compile the model.
+The name argument is the name of the collection the model is for.
+
+Mongoose automatically looks for the plural, lowercase version of this name
+
+```js
+const productSchema = new Schema({ /* implementation*/})
+const product = mongoose.model("product",productSchema);
+```
+
+Mongoose will look for a collection called products.
+
+### Documents
+
+A document represents a one-to-one mapping to a document as stored in MongoDB.
+
+`Model` and `Document` are distinct classes in Mongoose.
+
+The model class is a subclass of the documen class.
+
+A document is an instnace of its model.
+
+### Create
+
+New documents can be created by calling a model constructor.
+
+`let newDoc = new MyModel({example:'data'});`
+
+Saving a document is simple:
+
+`newDoc.save().then(() => console.log('Saved!'));`
+
+### Read
+
+Using `Model.find()` will get an array of documents that matches the query.
+
+```js
+let Product = mongoose.model('Product', productSchema);
+
+Product.find(                   // find all from product
+    { 'onSale': true },         // where onSale = true
+    'name price',               // select name, price
+    (err, prods) => {           // callback when complete / error
+        if (err) {
+            console.error('An error occurred:', err);
+        } else {
+            console.log('Products on sale:');
+            prods.forEach((prod) => console.log(prod.name, prod.price));
+        }
+    }
+);
+```
+
+### Update
+
+Updating a document works similarly.
+
+Mongoose tracks changes you make to documents and generates the update operators automatically.
+
+Calling `save()` on a modified document will update the document in the database.
+
+```js
+prod.onSale = true;
+
+// await will wait for a promise.
+await prod.save();
+```
+
+### Delete
+
+Documents can be removed in a number of ways:
+
+`Model.deleteOne()` – Delete a single document that matches a query.
+
+`Model.deleteMany()` – Delete multiple documents that match a query.
+
+The returned promise / callback resolves to an object containing:
+
+`ok` – 1 if no error occurred.
+
+`n` – Number of documents deleted.
+
+`deletedCount` – Same as `n`.
