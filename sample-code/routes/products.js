@@ -2,8 +2,8 @@ const router = require(`express`).Router();
 const {Product} = require(`../config/db`);
 
 // CREATE
-router.post(`/create`, ( req,res) => {
-    const prod = new Product();
+router.post(`/create`, ( {body},res) => {
+    const prod = new Product(body);
     prod.save().then((result) => {
         res.status(201).send(`${result.name} addedd successfully!`);
     }).catch(err => console.error(err));
@@ -13,7 +13,8 @@ router.post(`/create`, ( req,res) => {
 router.get(`/getAll`, (req,res) => {
     Product.find((err, prods) => {
         if(err){
-            next(err);
+            // next(err);
+            console.error(err);
         }
         res.send(prods);
     });
