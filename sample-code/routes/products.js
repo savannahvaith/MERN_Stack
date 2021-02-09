@@ -32,20 +32,12 @@ router.get(`/get/:id`, (req, res) => {
 
 // UPDATE
 router.put(`/replace/:id`, (req, res) => {
-    Product.findById(req.params.id, (err, result) => {
+    const {name, price,onSale} = req.query;
+    Product.findByIdAndUpdate(req.params.id, {name,price,onSale}, { new: true }, (err, result) => {
         if (err) {
-            // next(err);
             console.error(err);
         }
-        const prod = result; ;
-        prod.name = req.query.name;
-        prod.price = req.query.price;
-        prod.onSale = req.query.onSale;
-        prod.save().then(result => {
-            res.status(202).send(`Successfully replaced`);
-        }).catch(err => {
-            console.error(err);
-        })
+        res.status(202).send(`Successfully updated`);
     });
 });
 
@@ -56,7 +48,7 @@ router.patch(`/update/:id`, (req, res) => {
             console.error(err);
         }
         res.status(202).send(`Successfully updated`);
-    })
+    });
 });
 
 
