@@ -31,16 +31,6 @@ router.get(`/get/:id`, (req, res) => {
 });
 
 // UPDATE
-router.put(`/update/:id`, (req, res) => {
-    Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, result) => {
-        if (err) {
-            console.error(err);
-        }
-        res.status(202).send(`Successfully updated`);
-    });
-});
-
-// UPDATE
 router.patch(`/replace/:id`, (req, res) => {
     Product.findById(req.params.id, (err, prod) => {
         if (err) {
@@ -57,6 +47,16 @@ router.patch(`/replace/:id`, (req, res) => {
             res.status(202).send(`Successfully replaced`);
         });
     });
+});
+
+// UPDATE
+router.patch(`/update/:id`, (req, res) => {
+    Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, result) => {
+        if (err) {
+            console.error(err);
+        }
+        res.status(202).send(`Successfully updated`);
+    })
 });
 
 
