@@ -1,17 +1,12 @@
 const express = require('express');
 const app = express(); 
-
 const productRouter = require("./routes/products");
+const {PRODUCT_URL} = require('./config/config.json');
 
-// Middleware
-const logger = (req, res, next) => {
-	console.log(new Date());
-	next();
-}
+app.use(express.json());
 
-app.use(logger);
-
-app.use("/prod",productRouter);
+app.use(PRODUCT_URL,productRouter);
+// app.use(trainerUrl, trainerRoutes);
 
 // ! Route example - Moved to products.js:
 // app.get("/hello", (req,res) => {

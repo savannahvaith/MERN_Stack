@@ -368,3 +368,197 @@ app.use("/products", productRoutes);
 // products/update
 // products/delete
 ```
+
+## Mongoose
+
+Mongoose is a MongoDB object modelling library, written in JS.
+IT provides a simple API to work with MongoDB Database.
+It allows for interaction with the DB Directly without having to use SQL, or a query language.
+
+### Mongoose Installation
+
+`npm install mongoose --save`
+
+Import using require
+
+`const mongoose = require('mongoose');`
+
+### Connecting to MongoDB
+
+Connect using `mongoose.connect(uri,options`);
+
+This connects using mongoose default connection:
+
+`mongoose.connect('mongodb://localhost:2017/example', {useNewUrlParser:true});`
+
+We can connect to multiple databases by creating a new connection using the same format.
+
+Different connections can use different settings and can be connected to different databases:
+
+`const conn2 = mongoose.createConnection('mongodb://localhost:27017/example2',{urlNewUrlParser:true});`
+
+To check whether the connection was successful - use a callback or a promise:
+
+```js
+mongoose.connect(uri,options){
+    function(err){
+        if(err){
+            // handle error
+        }else{
+            // connection ready
+        }
+    }
+}
+```
+
+### Schemas
+
+Schemas define the structure of your collections, and the shape of the documents within.
+
+A schema is a configuration object for a model.
+
+A `SchemaType` is a configuration object for an individual property.
+It says what type a given path should have and what is valid for that path.
+Standard types include:
+
+* String
+* Boolean
+* Date
+* etc
+
+[Documentation](https://mongoosejs.com/docs/schematypes.html)
+
+```js
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+    name: String, 
+    price: String, 
+    location: [{
+        aisle: Number,
+        shelf: Number
+    }],
+    dateAdded:{
+        type: Date,
+        default: Date.now
+    }, 
+    onSale: Boolean
+});
+```
+
+### Validation
+
+Validation can be used to control what data is allowed in the schema.
+
+Validation is declared when defining a schema:
+
+```js
+const productSchema = new Schema({ 
+    name: {
+        type:String,
+        required: true,
+        minLength:2
+    },
+    price: String, 
+    location: [{
+        aisle: {
+            type: Number,
+            min: [1, 'Minimum is 1'],
+            max: 20
+        },
+        shelf: Number
+    }],
+    // ...
+});
+```
+
+### Models
+
+Models are constructors compiled from schema definitions.
+
+They are responsible for creating, and reading documents from the database.
+
+Call `mongoose.model(name,schema)` to compile the model.
+The name argument is the name of the collection the model is for.
+
+Mongoose automatically looks for the plural, lowercase version of this name
+
+```js
+const productSchema = new Schema({ /* implementation*/})
+const product = mongoose.model("product",productSchema);
+```
+
+Mongoose will look for a collection called products.
+
+### Documents
+
+A document represents a one-to-one mapping to a document as stored in MongoDB.
+
+`Model` and `Document` are distinct classes in Mongoose.
+
+The model class is a subclass of the documen class.
+
+A document is an instnace of its model.
+
+### Create
+
+New documents can be created by calling a model constructor.
+
+`let newDoc = new MyModel({example:'data'});`
+
+Saving a document is simple:
+
+`newDoc.save().then(() => console.log('Saved!'));`
+
+### Read
+
+Using `Model.find()` will get an array of documents that matches the query.
+
+```js
+let Product = mongoose.model('Product', productSchema);
+
+Product.find(                   // find all from product
+    { 'onSale': true },         // where onSale = true
+    'name price',               // select name, price
+    (err, prods) => {           // callback when complete / error
+        if (err) {
+            console.error('An error occurred:', err);
+        } else {
+            console.log('Products on sale:');
+            prods.forEach((prod) => console.log(prod.name, prod.price));
+        }
+    }
+);
+```
+
+### Update
+
+Updating a document works similarly.
+
+Mongoose tracks changes you make to documents and generates the update operators automatically.
+
+Calling `save()` on a modified document will update the document in the database.
+
+```js
+prod.onSale = true;
+
+// await will wait for a promise.
+await prod.save();
+```
+
+### Delete
+
+Documents can be removed in a number of ways:
+
+`Model.deleteOne()` – Delete a single document that matches a query.
+
+`Model.deleteMany()` – Delete multiple documents that match a query.
+
+The returned promise / callback resolves to an object containing:
+
+`ok` – 1 if no error occurred.
+
+`n` – Number of documents deleted.
+
+`deletedCount` – Same as `n`.
