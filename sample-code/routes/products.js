@@ -1,19 +1,33 @@
-const router = require("express").Router(); 
+const router = require(`express`).Router(); 
+const {Product} = require(`../config/db`);
 
-router.get("/get", (req,res) => {
-    res.send("Sent this from the get request");
+// CREATE
+router.post(`/create`, ( req,res) => {
+    const prod = new Product();
+    prod.save().then((result) => {
+        res.status(201).send(`${result.name} addedd successfully!`);
+    }).catch(err => console.error(err));
 });
 
-router.post("/create", (req,res) => {
-    res.send("Sending some information from the post");
+// READ
+router.get(`/getAll`, (req,res) => {
+    Product.find((err, prods) => {
+        if(err){
+            next(err);
+        }
+        res.send(prods);
+    });
 });
 
-router.put("/update", (req,res) => {
-    res.send("Some update sent");
+// UPDATE
+router.put(`/update`, (req,res) => {
+    res.send(`Some update sent`);
 });
 
-router.delete("/delete", (req,res)=>{
-    res.send("Deleted some information");
+
+// DELETE
+router.delete(`/delete`, (req,res)=>{
+    res.send(`Deleted some information`);
 });
 
 module.exports = router; 
