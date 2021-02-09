@@ -1,8 +1,8 @@
-const router = require(`express`).Router(); 
-const {Product} = require(`../config/db`);
+const router = require(`express`).Router();
+const { Product } = require(`../config/db`);
 
 // CREATE
-router.post(`/create`, ( {body},res) => {
+router.post(`/create`, ({ body }, res) => {
     const prod = new Product(body);
     prod.save().then((result) => {
         res.status(201).send(`${result.name} addedd successfully!`);
@@ -10,9 +10,9 @@ router.post(`/create`, ( {body},res) => {
 });
 
 // READ
-router.get(`/getAll`, (req,res) => {
+router.get(`/getAll`, (req, res) => {
     Product.find((err, prods) => {
-        if(err){
+        if (err) {
             // next(err);
             console.error(err);
         }
@@ -21,9 +21,9 @@ router.get(`/getAll`, (req,res) => {
 });
 
 // READ ONE
-router.get(`/get/:id`, (req,res) => {
+router.get(`/get/:id`, (req, res) => {
     Product.findById(req.params.id, (err, prod) => {
-        if(err){
+        if (err) {
             next(err);
         }
         res.send(prod);
@@ -31,17 +31,17 @@ router.get(`/get/:id`, (req,res) => {
 });
 
 // UPDATE
-router.patch(`/update/:id`, (req,res) => {
+router.patch(`/update/:id`, (req, res) => {
     Product.findById(req.params.id, (err, prod) => {
-        if(err){
+        if (err) {
             next(err);
         }
-        const result = prod; 
-        result.name = req.query.name; 
-        result.price = req.query.price; 
+        const result = prod;
+        result.name = req.query.name;
+        result.price = req.query.price;
         result.onSale = req.query.onSale;
         result.save((err) => {
-            if(err){
+            if (err) {
                 next(err);
             }
             res.status(202).send(`Successfully replaced`);
@@ -49,11 +49,21 @@ router.patch(`/update/:id`, (req,res) => {
     });
 });
 
+// UPDATE
+router.put(`/replace/:id`, (req, res) => {
+    Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, result) => {
+        if (err) {
+            console.error(err);
+        }
+        res.status(202).send(`Successfully updated`);
+    })
+});
+
 
 // DELETE
-router.delete(`/delete/:id`, (req,res)=>{
-    Product.findByIdAndDelete(req.params.id, (err,result) => {
-        if(err){
+router.delete(`/delete/:id`, (req, res) => {
+    Product.findByIdAndDelete(req.params.id, (err, result) => {
+        if (err) {
             console.error(err);
         }
         res.status(204).send(result);
