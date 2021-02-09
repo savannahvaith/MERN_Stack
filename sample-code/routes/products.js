@@ -31,7 +31,7 @@ router.get(`/get/:id`, (req, res) => {
 });
 
 // UPDATE
-router.patch(`/replace/:id`, (req, res) => {
+router.put(`/replace/:id`, (req, res) => {
     Product.findById(req.params.id, (err, prod) => {
         if (err) {
             next(err);
