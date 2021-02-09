@@ -37,7 +37,7 @@ router.put(`/replace/:id`, (req, res) => {
         if (err) {
             console.error(err);
         }
-        res.status(202).send(`Successfully updated`);
+        res.status(202).send(`Successfully replaced`);
     });
 });
 
