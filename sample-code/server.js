@@ -1,18 +1,22 @@
 const express = require('express');
 const app = express(); 
-const mongoose = require('mongoose');
-
 const productRouter = require("./routes/products");
+const {PRODUCT_URL} = require('./config/config.json');
+// const {trainerUrl} = require("./config/config.json");
+// const trainerRoutes = require("./routes/trainers");
+
+app.use(express.json());
 
 // Middleware
-const logger = (req, res, next) => {
-	console.log(new Date());
-	next();
-}
+// const logger = (req, res, next) => {
+// 	console.log(new Date());
+// 	next();
+// }
 
-app.use(logger);
+// app.use(logger);
 
-app.use("/prod",productRouter);
+app.use(PRODUCT_URL,productRouter);
+// app.use(trainerUrl, trainerRoutes);
 
 // ! Route example - Moved to products.js:
 // app.get("/hello", (req,res) => {
