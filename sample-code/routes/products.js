@@ -19,6 +19,16 @@ router.get(`/getAll`, (req,res) => {
     });
 });
 
+// READ ONE
+router.get(`/get/:id`, (req,res) => {
+    Product.findById(req.params.id, (err, prod) => {
+        if(err){
+            next(err);
+        }
+        res.send(prod);
+    });
+});
+
 // UPDATE
 router.put(`/update`, (req,res) => {
     res.send(`Some update sent`);
