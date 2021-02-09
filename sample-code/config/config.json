@@ -1,0 +1,5 @@
+{
+    "PRODUCT_URL": "/products",
+    "DB_NAME":"tesco",
+    "DB_URL": "localhost:27017"
+}
