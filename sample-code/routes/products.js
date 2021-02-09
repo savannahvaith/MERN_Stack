@@ -30,8 +30,22 @@ router.get(`/get/:id`, (req,res) => {
 });
 
 // UPDATE
-router.put(`/update`, (req,res) => {
-    res.send(`Some update sent`);
+router.patch(`/update/:id`, (req,res) => {
+    Product.findById(req.params.id, (err, prod) => {
+        if(err){
+            next(err);
+        }
+        const result = prod; 
+        result.name = req.query.name; 
+        result.price = req.query.price; 
+        result.onSale = req.query.onSale;
+        result.save((err) => {
+            if(err){
+                next(err);
+            }
+            res.status(202).send(`Successfully replaced`);
+        });
+    });
 });
 
 
