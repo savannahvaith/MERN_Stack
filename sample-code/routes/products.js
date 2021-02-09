@@ -51,8 +51,13 @@ router.patch(`/update/:id`, (req,res) => {
 
 
 // DELETE
-router.delete(`/delete`, (req,res)=>{
-    res.send(`Deleted some information`);
+router.delete(`/delete/:id`, (req,res)=>{
+    Product.findByIdAndDelete(req.params.id, (err,result) => {
+        if(err){
+            console.error(err);
+        }
+        res.status(204).send(result);
+    })
 });
 
 module.exports = router; 
