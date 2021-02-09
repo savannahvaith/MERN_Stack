@@ -32,20 +32,20 @@ router.get(`/get/:id`, (req, res) => {
 
 // UPDATE
 router.put(`/replace/:id`, (req, res) => {
-    Product.findById(req.params.id, (err, prod) => {
+    Product.findById(req.params.id, (err, result) => {
         if (err) {
-            next(err);
+            // next(err);
+            console.error(err);
         }
-        const result = prod;
-        result.name = req.query.name;
-        result.price = req.query.price;
-        result.onSale = req.query.onSale;
-        result.save((err) => {
-            if (err) {
-                next(err);
-            }
+        const prod = result; ;
+        prod.name = req.query.name;
+        prod.price = req.query.price;
+        prod.onSale = req.query.onSale;
+        prod.save().then(result => {
             res.status(202).send(`Successfully replaced`);
-        });
+        }).catch(err => {
+            console.error(err);
+        })
     });
 });
 
