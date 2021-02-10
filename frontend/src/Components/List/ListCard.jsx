@@ -7,7 +7,7 @@ const ListCard = ({id,title}) => {
             <div className="card">
                 <div className="card-header teal">
                     <h6 className="col-md-10 text-white title">{title}</h6>
-                    <EditList />
+                    <EditList title={title} id={id}/>
                 </div>
                 <div className="card-body" style={{height: "400px"}}>
                 </div>
