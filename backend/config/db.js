@@ -1,30 +1,40 @@
 const mongoose = require('mongoose');
-const {Schema, model} = mongoose; 
-const {DB_URL, DB_NAME} = require('./consts.json');
+const { Schema, model } = mongoose;
+const { DB_URL, DB_NAME } = require('./consts.json');
 
 const todoSchema = new Schema({
     title: {
         type: String,
-        required:true
+        required: true
     },
     description: String,
-    completed: Boolean, 
+    completed: Boolean,
     createdAt: {
         type: Date,
         default: Date.now()
     },
-    updatedAt:{
+    updatedAt: {
         type: Date
     }
 });
 
-const Todo = model('Todo',todoSchema);
+const Todo = model('Todo', todoSchema);
 
-mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, {useNewUrlParser:true}, (err) => {
-    if(err){
+
+const listSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    }
+});
+
+const List = model('List', listSchema);
+
+mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, { useNewUrlParser: true }, (err) => {
+    if (err) {
         console.error(err);
     }
     console.log(`Connected to DB Successfully!`);
 });
 
-module.exports = {"Todo" : Todo};
+module.exports = { "Todo": Todo, "List": List };
