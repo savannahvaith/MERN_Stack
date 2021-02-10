@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SideBar from "./SideBar";
-import List from "./List";
+import List from "../List/List";
 
 const Home = () => {
 
