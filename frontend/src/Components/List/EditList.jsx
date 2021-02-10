@@ -44,8 +44,8 @@ const EditList = ({ id, title }) => {
 
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" onClick={update} data-bs-dismiss="modal" className="btn btn-outline-success">Accept</button>
-                                <button type="button" data-bs-dismiss="modal" className="btn btn-outline-danger">Close</button>
+                                <button type="button" data-bs-dismiss="modal" className="btn btn-outline-danger">Cancel</button>
+                                <button type="submit" onClick={update} data-bs-dismiss="modal" className="btn btn-outline-success">Update</button>
                             </div>
                         </form>
                     </div>
