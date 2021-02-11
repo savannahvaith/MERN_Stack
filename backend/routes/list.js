@@ -49,4 +49,8 @@ router.delete(`/delete/:id`, (req, res,next) => {
     });
 });
 
+router.get("/hello", (req,res,next) => {
+    res.status(200).send("hello");
+})
+
 module.exports = router;
