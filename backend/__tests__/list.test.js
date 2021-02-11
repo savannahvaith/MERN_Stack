@@ -22,5 +22,32 @@ describe("Lists", function(){
             });
         });
     });
+
+    describe("CREATE Functionality", function(){
+        it("/Create should add to the list", (done) => {
+            chai.request(app)
+            .post(`${LIST_URL}/create`)
+            .send({'title':'Test'})
+            .end(function(err,res){
+                expect(err).to.be.null;
+                expect(res).to.have.status(201);
+                expect(res).to.have.property('text', 'Test added successfully!');
+                done();
+            });
+        });
+    })
+
+    describe("READ Functionality", function(){
+        it('/GetAll route should return all of the eleemnts in the db', (done) => {
+            chai.request(app)
+                .get(`${LIST_URL}/getAll`)
+                .end(function (err, res) {
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(200);
+                    // expect(res).to.have.property('text', '[]');
+                    done();
+                });
+        });
+    });
 });
 
