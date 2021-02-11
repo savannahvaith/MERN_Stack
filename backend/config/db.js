@@ -30,7 +30,7 @@ const listSchema = new Schema({
 
 const List = model('List', listSchema);
 
-mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, { useNewUrlParser: true }, (err) => {
+mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) {
         console.error(err);
     }
