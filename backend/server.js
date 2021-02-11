@@ -25,6 +25,8 @@ app.use((err,req,res,next)=> {
     res.status(err.statusCode || 500).send(err.message);
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+const server = app.listen(port, () => {
+    console.log(`Server started successfully on port ${server.address().port}`);
 });
+
+module.exports = server; 
