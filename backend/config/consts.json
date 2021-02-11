@@ -1,6 +1,6 @@
 {
     "LIST_URL":"/list",
     "TODO_URL":"/todo",
-    "DB_NAME" :"Todo",
+    "DB_NAME" :"todo",
     "DB_URL":"localhost:27017"
 }
