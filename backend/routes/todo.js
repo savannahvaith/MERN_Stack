@@ -5,7 +5,7 @@ const {Todo} = require('../config/db');
 router.post(`/create`, ({body}, res) => {
     const todo = new Todo(body);
     todo.save().then(result => {
-        res.status(201).send(`${result.title} addedd successfully!`);
+        res.status(201).send(result);
     }).catch(err => console.error(err));
 });
 
