@@ -29,7 +29,7 @@ const SideBar = ({trigger}) => {
                     <h6 className="title">Create New List</h6>
                     <form onSubmit={addToDB}>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input type="text" className="form-control" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
                             <label htmlFor="title">Title</label>
                         </div>
                         <button type="submit" className="btn btn-outline-dark">Add List</button>
