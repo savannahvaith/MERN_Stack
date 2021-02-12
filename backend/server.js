@@ -22,7 +22,7 @@ app.use((req,res,next) => {
 });
 
 app.use((err,req,res,next)=> {
-    res.status(err.statusCode || 500).send(err.message);
+    res.status(err.statusCode || 500).send(err.message || `Something went wrong!`);
 });
 
 const server = app.listen(port, () => {
