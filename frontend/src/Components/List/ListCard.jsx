@@ -13,7 +13,7 @@ const ListCard = ({id,title, trigger}) => {
                 </div>
                 <div className="card-footer">
                     <div className="float-right">
-                        <DeleteList id={id} trigger={trigger}/>
+                        <DeleteList id={id} trigger={trigger} title={title}/>
                     {' '}
                     <button className="btn btn-outline-success">Add Task</button>
                     </div>
