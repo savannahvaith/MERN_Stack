@@ -4,20 +4,18 @@ import { LIST_URL } from '../../CONSTS.json';
 
 const SideBar = ({trigger}) => {
 
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState(``);
 
     const addToDB= (event) => {
         event.preventDefault();
         console.log(`Form submitted`);
         console.log(`Title: ${title}`);
         axios.post(`${LIST_URL}/create`, {title})
-        .then(res => {
-            setTitle("");
-            alert("Successfully added!");
-            trigger(`${title} added`);
+        .then(() => {
+            trigger(`${title} List Added!`);
+            setTitle(``);
         }).catch(err => {
-            console.error(err);
-            alert("Oops...");
+            alert(`${err} Oops..`);
         });
         
     }
