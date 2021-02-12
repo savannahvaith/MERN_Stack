@@ -12,9 +12,6 @@ const todoSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now()
-    },
-    updatedAt: {
-        type: Date
     }
 });
 
@@ -25,7 +22,8 @@ const listSchema = new Schema({
     title: {
         type: String,
         required: true
-    }
+    }, 
+   todo: [todoSchema]
 });
 
 const List = model('List', listSchema);
