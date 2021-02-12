@@ -21,13 +21,13 @@ const ListCard = ({ listID, listTitle,trigger}) => {
                     <EditList listTitle={listTitle} listID={listID} trigger={trigger}/>
                 </div>
                 <div className="card-body" style={{height: "400px"}}>
-                    <ReadTask data={allTask} updateData={updateData} listID={listID}/>
+                    <ReadTask data={allTask} updateData={updateData} listID={listID} trigger={trigger}/>
                 </div>
                 <div className="card-footer">
                     <div className="float-right">
                         <DeleteList listTitle={listTitle} listID={listID} trigger={trigger} />
                         {' '}
-                        <AddTask updateData={updateData} allTask={allTask} listID={listID}/>
+                        <AddTask updateData={updateData} allTask={allTask} listID={listID} trigger={trigger}/>
                     </div>
                 </div>
             </div>
