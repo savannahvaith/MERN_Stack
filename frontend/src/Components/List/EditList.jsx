@@ -2,14 +2,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import { LIST_URL } from '../../CONSTS.json';
 
-const EditList = ({ id, title }) => {
+const EditList = ({ id, title,trigger }) => {
 
     const [titleUpdate, setTitleUpdate] = useState(title);
 
     const update = (e) => {
-        console.log("am i called?");
         e.preventDefault();
-        axios.patch(`${LIST_URL}/update/${id}`, { title:titleUpdate }).then(res => console.log(res));
+        axios.patch(`${LIST_URL}/update/${id}`,
+         { title:titleUpdate })
+         .then(res => trigger(`${res.data.title} List Updated!`));
     }
 
     return (
