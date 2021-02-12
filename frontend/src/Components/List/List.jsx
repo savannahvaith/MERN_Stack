@@ -29,8 +29,8 @@ const List = ({ msg, trigger }) => {
             <div id="result" className="alert alert-success">{msg}</div>
             <div className="row">
                 <br />
-                {todoList.map((list) => (
-                    <ListCard key={list._id} id={list._id} title={list.title} trigger={trigger} />
+                {todoList.map((list, index) => (
+                    <ListCard key={index} listID={list._id} listTitle={list.title} trigger={trigger}/>
                 ))}
             </div>
         </div>
