@@ -16,7 +16,7 @@ const Home = () => {
                     <SideBar trigger={trigger}/>
                 </div>
                 <div className="col-md-10">
-                    <List msg={msg}/>
+                    <List msg={msg} trigger={trigger}/>
                 </div>
             </div>
         </>

@@ -1,10 +1,12 @@
 import axios from 'axios';
 import {LIST_URL} from '../../CONSTS.json';
-const DeleteList = ({id}) => {
+const DeleteList = ({id, trigger}) => {
 
     const remove = () => {
-        axios.delete(`${LIST_URL}/delete/${id}`).then(
+        axios.delete(`${LIST_URL}/delete/${id}`).then( () => {
             alert("successfully removed")
+            trigger("Successfully removed");
+        }
         );
     }
 

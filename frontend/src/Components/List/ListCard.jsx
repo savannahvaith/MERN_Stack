@@ -1,7 +1,7 @@
 import DeleteList from "./DeleteList";
 import EditList from "./EditList";
 
-const ListCard = ({id,title}) => {
+const ListCard = ({id,title, trigger}) => {
     return(
         <div className="col-xl-4">
             <div className="card">
@@ -13,7 +13,7 @@ const ListCard = ({id,title}) => {
                 </div>
                 <div className="card-footer">
                     <div className="float-right">
-                        <DeleteList id={id}/>
+                        <DeleteList id={id} trigger={trigger}/>
                     {' '}
                     <button className="btn btn-outline-success">Add Task</button>
                     </div>
