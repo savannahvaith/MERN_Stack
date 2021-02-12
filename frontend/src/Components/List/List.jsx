@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { LIST_URL } from '../../CONSTS.json';
 import ListCard from './ListCard';
 
-const List = () => {
+const List = ({ msg }) => {
     const [todoList, setTodoList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ const List = () => {
             setLoading(false);
             setError(err);
         });
-    }, []);
+    }, [msg]);
 
     if (loading) {
         return <p>Loading</p>
@@ -26,12 +26,15 @@ const List = () => {
         return <p>{error}</p>
     }
     return (
-        <div className="row">
-            <br/>
-            {todoList.map((list) => (
-                <ListCard key={list._id} id={list._id} title={list.title} />
-            ))}
-        </div>
+        <>
+            <div className="alert alert-success">{msg}</div>
+            <div className="row">
+                <br />
+                {todoList.map((list) => (
+                    <ListCard key={list._id} id={list._id} title={list.title} />
+                ))}
+            </div>
+        </>
     )
 
 }

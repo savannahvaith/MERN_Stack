@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { LIST_URL } from '../../CONSTS.json';
 
-const SideBar = () => {
+const SideBar = ({trigger}) => {
 
     const [title, setTitle] = useState("");
 
@@ -14,6 +14,7 @@ const SideBar = () => {
         .then(res => {
             setTitle("");
             alert("Successfully added!");
+            trigger(`${title} added`);
         }).catch(err => {
             console.error(err);
             alert("Oops...");
