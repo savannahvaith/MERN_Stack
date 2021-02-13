@@ -3,7 +3,7 @@ import axios from 'axios';
 import { LIST_URL ,TODO_URL} from '../../CONSTS.json';
 import Modal from 'react-bootstrap/Modal';
 
-const AddTask = ({ updateData, allTask, listID, trigger}) => {
+const AddTask = ({ allTask, listID, trigger}) => {
 
     const [taskName, setTaskName] = useState("");
     const [description, setDescription] = useState("");
@@ -20,7 +20,7 @@ const AddTask = ({ updateData, allTask, listID, trigger}) => {
         arr.push(data.data);
         console.log(listID);
         axios.patch(`${LIST_URL}/update/${listID}`, { todo: arr }).then(res => console.log(res));
-        trigger(`Task added!`);
+        trigger(`${data.data.title} Task added!`);
     }
 
     return (
