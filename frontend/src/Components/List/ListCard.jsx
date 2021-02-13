@@ -20,14 +20,14 @@ const ListCard = ({ listID, listTitle,trigger}) => {
                     <h6 className="col-md-10 text-white title">{listTitle}</h6>
                     <EditList listTitle={listTitle} listID={listID} trigger={trigger}/>
                 </div>
-                <div className="card-body" style={{height: "400px"}}>
+                <div className="card-body">
                     <ReadTask data={allTask} updateData={updateData} listID={listID} trigger={trigger}/>
                 </div>
                 <div className="card-footer">
                     <div className="float-right">
                         <DeleteList listTitle={listTitle} listID={listID} trigger={trigger} />
                         {' '}
-                        <AddTask updateData={updateData} allTask={allTask} listID={listID} trigger={trigger}/>
+                        <AddTask allTask={allTask} listID={listID} trigger={trigger}/>
                     </div>
                 </div>
             </div>
