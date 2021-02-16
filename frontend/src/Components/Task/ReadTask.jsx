@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { LIST_URL } from '../../CONSTS.json';
+import EditTask from './EditTask';
 
 const ReadTask = ({ data, listID, updateData }) => {
 
@@ -20,7 +21,7 @@ const ReadTask = ({ data, listID, updateData }) => {
                                 <p style={ item.completed ? {textDecoration: "line-through"} : {}}>{item.title}</p>
                             </div>
                             <div className="col-md-2">
-                                <button className="btn btn-outline-info">&#8942;</button>
+                                <EditTask taskID={item._id}/>
                             </div>
                         </>
 
