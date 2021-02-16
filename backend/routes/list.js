@@ -49,6 +49,15 @@ router.delete(`/delete/:id`, (req, res,next) => {
     });
 });
 
+// Save with Todo
+router.get(`/saveTodo/:id`, (req, res,next) => {
+    List.findById(req.params.id).populate('todo') // key to populate
+        .exec(function(err,todo){
+            if(err) console.log(err);
+            else console.log(todo);
+        })
+});
+
 router.get("/hello", (req,res,next) => {
     res.status(200).send("hello");
 })
