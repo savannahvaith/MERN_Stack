@@ -1,0 +1,4 @@
+{
+    "LIST_URL":"http://localhost:1905/list",
+    "TODO_URL":"http://localhost:1905/todo"
+}
