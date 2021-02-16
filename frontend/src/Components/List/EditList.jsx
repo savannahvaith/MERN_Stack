@@ -6,8 +6,6 @@ import  Modal  from 'react-bootstrap/Modal';
 const EditList = ({ listID, trigger, listTitle }) => {
 
     const [titleUpdate, setTitleUpdate] = useState(listTitle);
-    console.log(`From editlist - ${listID}`);
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,7 +13,6 @@ const EditList = ({ listID, trigger, listTitle }) => {
     const update = (e) => {
         e.preventDefault();
         axios.patch(`${LIST_URL}/update/${listID}`, { title: titleUpdate }).then((res) => {
-            console.log(res);
             trigger(`Updated ${res.data.title}`);
             setTitleUpdate('');
             document.querySelector('#inputtitle').value = "";
