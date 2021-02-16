@@ -12,7 +12,8 @@ const todoSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now()
-    }
+    },
+    list: {type: Schema.Types.ObjectId, ref: 'List'}
 });
 
 const Todo = model('Todo', todoSchema);
@@ -23,7 +24,7 @@ const listSchema = new Schema({
         type: String,
         required: true
     }, 
-   todo: [todoSchema]
+    todo: [{type: mongoose.Schema.Types.ObjectId,ref: 'Todo'}]
 });
 
 const List = model('List', listSchema);
@@ -35,4 +36,4 @@ mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, { useNewUrlParser: true, useU
     console.log(`Connected to DB Successfully!`);
 });
 
-module.exports = { "Todo": Todo, "List": List };
+module.exports = { "Todo": Todo, "List": List};
