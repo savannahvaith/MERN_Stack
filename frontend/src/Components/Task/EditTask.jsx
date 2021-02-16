@@ -3,7 +3,7 @@ import axios from 'axios';
 import {TODO_URL} from '../../CONSTS.json';
 import Modal from 'react-bootstrap/Modal';
 
-const EditTask = ({taskID}) => {
+const EditTask = ({taskID, trigger}) => {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -12,9 +12,8 @@ const EditTask = ({taskID}) => {
     const [taskDescription,setTaskDescription] = useState('');
     const [taskCompleted, setTaskcompleted] = useState(false);
 
-    useEffect( () => {
-        axios.get(`${TODO_URL}/get/${taskID}`).then((res) => {
-            console.log(res);
+    useEffect( async() => {
+       await axios.get(`${TODO_URL}/get/${taskID}`).then((res) => {
             setTaskName(res.data.title);
             setTaskDescription(res.data.description);
             setTaskcompleted(res.data.completed);
@@ -23,10 +22,17 @@ const EditTask = ({taskID}) => {
 
     const update = async(e) => {
         e.preventDefault();
-       const data =  await axios.patch(`${TODO_URL}/update/${taskID}`, {title: taskName, description: taskDescription, completed: taskCompleted}); 
-        // axios.patch(`${LIST_URL}/update/${listID}`, {todo: })
+        await axios.patch(`${TODO_URL}/update/${taskID}`, {title: taskName, description: taskDescription, completed: taskCompleted}); 
+        trigger(`${taskName} Task Updated!`);
     }
 
+    const deleteTask = async(e) => {
+        e.preventDefault(); 
+        await axios.delete(`${TODO_URL}/delete/${taskID}`);
+        handleClose();
+        trigger(`${taskName} Deleted!`);
+    }
+    
     return (
         <>
             <button className="btn btn-outline-info" onClick={handleShow}>&#8942;</button>
@@ -74,7 +80,8 @@ const EditTask = ({taskID}) => {
                     </Modal.Body>
                     <Modal.Footer>
                         <button type="button" onClick={handleClose} className="btn btn-outline-danger">Cancel</button>
-                        <button type="submit" onClick={handleClose} className="btn btn-outline-success">Add</button>
+                        <button type="button" onClick={deleteTask} className="btn btn-outline-danger">Delete</button>
+                        <button type="submit" onClick={handleClose} className="btn btn-outline-success">Update</button>
                     </Modal.Footer>
                 </form>
             </Modal>
