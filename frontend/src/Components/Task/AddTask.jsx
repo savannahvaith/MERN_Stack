@@ -20,7 +20,7 @@ const AddTask = ({ allTask, listID, trigger}) => {
         arr.push(data.data);
         console.log(listID);
         axios.patch(`${LIST_URL}/update/${listID}`, { todo: arr }).then(res => console.log(res));
-        trigger(`${data.data.title} Task added!`);
+        trigger(`${data.data.title}Task added!`);
     }
 
     return (
